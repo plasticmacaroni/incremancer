@@ -43,7 +43,9 @@ Upgrades = {
     energyCost : "energyCost",
     autoconstruction : "autoconstruction",
     autoshop : "autoshop",
-    graveyardHealth : "graveyardHealth"
+    graveyardHealth : "graveyardHealth",
+    insidiousPlague : "insidiousPlague",
+    boneBoom : "boneBoom"
   },
 
   costs : {
@@ -81,6 +83,7 @@ Upgrades = {
       var upgrade = Upgrades.upgrades.filter(up => up.id == GameModel.persistentData.upgrades[i].id)[0];
       if (!upgrade) {
         upgrade = Upgrades.prestigeUpgrades.filter(up => up.id == GameModel.persistentData.upgrades[i].id)[0];
+        upgrade.auto = GameModel.persistentData.autoBuy;
       }
       if (upgrade) {
         this.applyUpgrade(upgrade, GameModel.persistentData.upgrades[i].rank);
@@ -230,6 +233,12 @@ Upgrades = {
       case this.types.graveyardHealth:
         GameModel.graveyardHealthMod *= Math.pow(1 + upgrade.effect, rank);
         return;
+      case this.types.insidiousPlague:
+        Humans.plagueTickModifier = 0;
+        GameModel.plagueDamagePCMod *= 0.01;
+        return;
+      case this.types.boneBoom:
+        GameModel.boneBoom = true;
     }
   },
 
@@ -391,6 +400,10 @@ Upgrades = {
         return "Harpy bombs: " + formatWhole(GameModel.harpyBombs);
       case this.types.tankBuster:
         return this.currentRank(upgrade) > 0 ? "You have unlocked tank buster" : "You have yet to unlock tank buster";
+      case this.types.insidiousPlague:
+        return this.currentRank(upgrade) > 0 ? "You have unlocked the insidious plague" : "You have yet to unlock the insidious plague";
+      case this.types.boneBoom:
+        return this.currentRank(upgrade) > 0 ? "You have unlocked Bone Boom" : "You have yet to unlock Bone Boom";
     }
   },
 
@@ -985,8 +998,10 @@ Upgrades.prestigeUpgrades = [
   // new Upgrades.Upgrade(107, "Zombie Damage", Upgrades.types.zombieDmgPC, Upgrades.costs.prestigePoints, 10, 1.25, 0.2, 0, "Additional 20% zombie damage for each rank")
   new Upgrades.Upgrade(111, "Parts Rate", Upgrades.types.partsGainPC, Upgrades.costs.prestigePoints, 10, 1.25, 0.2, 0, "Additional 20% creature parts income rate for each rank."),
   new Upgrades.Upgrade(112, "Auto Construction", Upgrades.types.autoconstruction, Upgrades.costs.prestigePoints, 250, 1, 1, 1, "Unlock the ability to automatically start construction of the cheapest available building option."),
-  new Upgrades.Upgrade(114, "Auto Shop", Upgrades.types.autoshop, Upgrades.costs.prestigePoints, 250, 1, 1, 1, "Unlock the ability to automatically purchase items from the shop."),
   new Upgrades.Upgrade(113, "Graveyard Health", Upgrades.types.graveyardHealth, Upgrades.costs.prestigePoints, 10, 1.25, 0.1, 0, "Additional 10% graveyard health during boss levels with each rank."),
+  new Upgrades.Upgrade(114, "Auto Shop", Upgrades.types.autoshop, Upgrades.costs.prestigePoints, 250, 1, 1, 1, "Unlock the ability to automatically purchase items from the shop."),
+  new Upgrades.Upgrade(115, "Insidious Plague", Upgrades.types.insidiousPlague, Upgrades.costs.prestigePoints, 250, 1, 1, 1, "Makes the plague incurable so it lasts forever, but makes it do significantly less damage over time."),
+  new Upgrades.Upgrade(116, "Bone Boom", Upgrades.types.boneBoom, Upgrades.costs.prestigePoints, 10000, 1, 1, 1, "Automatically destroys all zombies before each level ends, turning them into bones.")
 ];
 
 Upgrades.upgrades = [

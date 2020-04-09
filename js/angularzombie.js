@@ -319,7 +319,7 @@ angular.module('zombieApp', [])
     }
 
     zm.cancelConstruction = function() {
-      if(confirm("Are you sure you want to cancel construction?")) {
+      if(confirm("Are you sure you want to cancel construction? Resources used so far will be lost.")) {
         Upgrades.cancelConstruction();
         zm.upgrades = Upgrades.getAvailableConstructions();
       }
@@ -486,6 +486,15 @@ angular.module('zombieApp', [])
       } else {
         zm.model.persistentData.autoStart = true;
       }
+    }
+
+    zm.toggleAutoBuy = function() {
+      if (zm.model.persistentData.autoBuy) {
+        zm.model.persistentData.autoBuy = false;
+      } else {
+        zm.model.persistentData.autoBuy = true;
+      }
+      zm.model.setAutoBuy(zm.model.persistentData.autoBuy);
     }
 
     zm.toggleResolution = function(resolution) {

@@ -16,6 +16,12 @@
       <button ng-click="zm.toggleAutoStart();">{{zm.model.persistentData.autoStart ? "On" : "Off"}}</button>
     </div>
     <div class="upgrade">
+      <h4>Auto Purchase</h4>
+      <p>Does nothing until this feature is unlocked, and then sets all items to automatically be purchased.</p>
+      <p>This may result in purchase of unwanted items, but is helpful for idle play.</p>
+      <button ng-click="zm.toggleAutoBuy();">{{zm.model.persistentData.autoBuy ? "On" : "Off"}}</button>
+    </div>
+    <div class="upgrade">
       <h4>Render Resolution</h4>
       <p>Choose your preferred resolution to render the game.</p>
       <p>50% will run better on slower hardware but may look blurry.</p>

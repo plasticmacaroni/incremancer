@@ -146,6 +146,7 @@ GameModel = {
     this.harpySpeed = 75;
     this.tankBuster = false;
     this.harpyBombs = 1;
+    this.boneBoom = false;
   },
 
   addEnergy(value) {
@@ -242,6 +243,11 @@ GameModel = {
       }
   
       if (this.getHumanCount() <= 0) {
+        //detonate all zombies if the prestige perk has been bought
+        if (this.boneBoom == true) {
+          Zombies.detonate = true;
+          Zombies.update(0);
+        }
 
         if (this.endLevelTimer < 0) {
           if (this.isBossStage(this.level) && Trophies.doesLevelHaveTrophy(this.level)) {
@@ -263,6 +269,8 @@ GameModel = {
               window.kongregate.stats.submit("level", this.persistentData.allTimeHighestLevel);
             }
           }
+          //Make sure to reset the detonation on all zombies
+          Zombies.detonate = false;
           this.startTimer = 3;
         } else {
           this.endLevelTimer -= timeDiff;
@@ -470,7 +478,8 @@ GameModel = {
     creatures : [],
     creatureAutobuild : [],
     savedCreatures : [],
-    levelsCompleted : []
+    levelsCompleted : [],
+    autoBuy : false
   },
 
   addPrestigePoints(points) {
@@ -525,7 +534,7 @@ GameModel = {
       this.setupLevel();
       this.saveData();
       for (var i = 0; i < Upgrades.upgrades.length; i++) {
-        Upgrades.upgrades[i].auto = false;
+        Upgrades.upgrades[i].auto = this.persistentData.autoBuy;
       }
     }
   },
@@ -602,6 +611,17 @@ GameModel = {
   sendMessage(message) {
     if (!this.messageQueue.includes(message)) {
       this.messageQueue.push(message);
+    }
+  },
+
+  setAutoBuy(value) {
+    if (value == true) {
+      for (var i = 0; i < Upgrades.upgrades.length; i++) {
+        Upgrades.upgrades[i].auto = this.persistentData.autoBuy;
+      }
+      if (this.persistentData.autoconstructionUnlocked == true) {
+        this.persistentData.autoconstruction = true;
+      }
     }
   },
 

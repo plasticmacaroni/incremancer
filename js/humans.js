@@ -25,7 +25,8 @@ Humans = {
   attackSpeed : 2,
   attackDamage : 5,
   fadeSpeed : 0.1,
-  plagueTickTimer : 5,
+  plagueTickModifier : 1,
+  plagueTickTimer : 5, 
   healTickTimer : 4,
   burnTickTimer : 5,
   smokeTimer : 0.3,
@@ -481,7 +482,7 @@ Humans = {
       this.damageHuman(human, human.plagueDamage);
       human.plagueTickTimer = this.plagueTickTimer;
       Exclamations.newPoison(human);
-      human.plagueTicks--;
+      human.plagueTicks -= human.plagueTickModifier;
       if (human.plagueTicks <= 0) {
         human.infected = false;
         human.plagueDamage = 0;
