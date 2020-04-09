@@ -74,6 +74,27 @@ Spells = {
       end() {
         Zombies.super = false;
       }
+    }, 
+    {
+      id : 6,
+      name : "Advanced Time Warp",
+      tooltip : "Speed up the flow of time for as long as you are able",
+      icon : "",
+      cooldown : 0,
+      duration : 1,
+      energyCost : 1,
+      start() {
+        this.onCooldown = true;
+        this.cooldownLeft = Math.ceil(GameModel.energy/10)
+        this.active = true;
+        this.timer = this.cooldownLeft;
+        GameModel.sendMessage(this.name);
+        GameModel.gameSpeed = Math.ceil(GameModel.energy/10);
+        GameModel.energy = 0;
+      },
+      end() {
+        GameModel.gameSpeed = 1;
+      }
     }
   ],
   lockAllSpells() {

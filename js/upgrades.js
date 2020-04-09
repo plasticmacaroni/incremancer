@@ -404,6 +404,8 @@ Upgrades = {
         return this.currentRank(upgrade) > 0 ? "You have unlocked the insidious plague" : "You have yet to unlock the insidious plague";
       case this.types.boneBoom:
         return this.currentRank(upgrade) > 0 ? "You have unlocked Bone Boom" : "You have yet to unlock Bone Boom";
+      case this.types.advancedTimeWarp:
+        return this.currentRank(upgrade) > 0 ? "You have unlocked advanced time warp" : "You have yet to unlock advanced time warp"
     }
   },
 
@@ -1000,8 +1002,9 @@ Upgrades.prestigeUpgrades = [
   new Upgrades.Upgrade(112, "Auto Construction", Upgrades.types.autoconstruction, Upgrades.costs.prestigePoints, 250, 1, 1, 1, "Unlock the ability to automatically start construction of the cheapest available building option."),
   new Upgrades.Upgrade(113, "Graveyard Health", Upgrades.types.graveyardHealth, Upgrades.costs.prestigePoints, 10, 1.25, 0.1, 0, "Additional 10% graveyard health during boss levels with each rank."),
   new Upgrades.Upgrade(114, "Auto Shop", Upgrades.types.autoshop, Upgrades.costs.prestigePoints, 250, 1, 1, 1, "Unlock the ability to automatically purchase items from the shop."),
-  new Upgrades.Upgrade(115, "Insidious Plague", Upgrades.types.insidiousPlague, Upgrades.costs.prestigePoints, 250, 1, 1, 1, "Makes the plague incurable so it lasts forever, but makes it do significantly less damage over time."),
-  new Upgrades.Upgrade(116, "Bone Boom", Upgrades.types.boneBoom, Upgrades.costs.prestigePoints, 10000, 1, 1, 1, "Automatically destroys all zombies before each level ends, turning them into bones.")
+  new Upgrades.Upgrade(115, "Insidious Plague", Upgrades.types.insidiousPlague, Upgrades.costs.prestigePoints, 2500, 1, 1, 1, "Makes the plague incurable so it lasts forever, but makes it do significantly less damage over time."),
+  new Upgrades.Upgrade(116, "Bone Boom", Upgrades.types.boneBoom, Upgrades.costs.prestigePoints, 10000, 1, 1, 1, "Automatically destroys all zombies before each level ends, turning them into bones."),
+  new Upgrades.Upgrade(117, "Advanced Time Warp", Upgrades.types.unlockSpell, Upgrades.costs.prestigePoints, 1000000, 1, 6, 1, "Uses all energy, and warps time for (energy expended / 10)."),
 ];
 
 Upgrades.upgrades = [

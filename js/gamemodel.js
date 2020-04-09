@@ -513,7 +513,6 @@ GameModel = {
       this.persistentData.creatureAutobuild = [];
       this.persistentData.levelsCompleted = [];
       this.zombiesInCages = 0;
-      this.autoconstruction = false;
       this.levelResourcesAdded = false;
       this.persistentData.gigazombiesOn = false;
       this.gigazombies = false;
@@ -531,11 +530,9 @@ GameModel = {
       CreatureFactory.resetLevels();
       this.level = 1;
       this.currentState = this.states.prestiged;
+      this.setAutoBuy(this.persistentData.autoBuy);
       this.setupLevel();
       this.saveData();
-      for (var i = 0; i < Upgrades.upgrades.length; i++) {
-        Upgrades.upgrades[i].auto = this.persistentData.autoBuy;
-      }
     }
   },
 
@@ -619,8 +616,8 @@ GameModel = {
       for (var i = 0; i < Upgrades.upgrades.length; i++) {
         Upgrades.upgrades[i].auto = this.persistentData.autoBuy;
       }
-      if (this.persistentData.autoconstructionUnlocked == true) {
-        this.persistentData.autoconstruction = true;
+      if (this.autoconstructionUnlocked == true && this.persistentData.autoBuy) {
+        this.autoconstruction = true;
       }
     }
   },
