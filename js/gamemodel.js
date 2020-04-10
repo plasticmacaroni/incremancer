@@ -234,6 +234,8 @@ GameModel = {
       Upgrades.updateRunicSyphon(this.runicSyphon);
       
       if (this.lastSave + 30000 < updateTime) {
+        //Set autobuy when saving so it doesn't happen every tick
+        this.setAutoBuy(this.persistentData.autoBuy);
         this.saveData();
         this.lastSave = updateTime;
       }
@@ -530,7 +532,6 @@ GameModel = {
       CreatureFactory.resetLevels();
       this.level = 1;
       this.currentState = this.states.prestiged;
-      this.setAutoBuy(this.persistentData.autoBuy);
       this.setupLevel();
       this.saveData();
     }
@@ -614,9 +615,12 @@ GameModel = {
   setAutoBuy(value) {
     if (value == true) {
       for (var i = 0; i < Upgrades.upgrades.length; i++) {
-        Upgrades.upgrades[i].auto = this.persistentData.autoBuy;
+        Upgrades.upgrades[i].auto = false;
+        if (Upgrades.hasRequirement(Upgrades.upgrades[i])) {
+          Upgrades.upgrades[i].auto = true;
+        }
       }
-      if (this.autoconstructionUnlocked == true && this.persistentData.autoBuy) {
+      if (this.autoconstructionUnlocked == true && this.persistentData.autoBuy && Upgrades.getAvailableConstructions().length > 0) {
         this.autoconstruction = true;
       }
     }
