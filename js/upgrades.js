@@ -409,7 +409,7 @@ Upgrades = {
       case this.types.advancedTimeWarp:
         return this.currentRank(upgrade) > 0 ? "You have unlocked advanced time warp" : "You have yet to unlock advanced time warp";
       case this.types.prestigePointsUpgrade:
-        return this.currentRank(upgrade) > 0 ? "You have unlocked the prestige points ppgrade" : "You have yet to unlock the prestige points upgrade"
+        return this.currentRank(upgrade) > 0 ? "You have unlocked the prestige points upgrade" : "You have yet to unlock the prestige points upgrade"
     }
   },
 
@@ -1009,7 +1009,7 @@ Upgrades.prestigeUpgrades = [
   new Upgrades.Upgrade(114, "Auto Shop", Upgrades.types.autoshop, Upgrades.costs.prestigePoints, 250, 1, 1, 1, "Unlock the ability to automatically purchase items from the shop."),
   new Upgrades.Upgrade(115, "Insidious Plague", Upgrades.types.insidiousPlague, Upgrades.costs.prestigePoints, 2500, 1, 1, 1, "Makes the plague incurable so it lasts forever, but makes it do significantly less damage over time."),
   new Upgrades.Upgrade(116, "Bone Boom", Upgrades.types.boneBoom, Upgrades.costs.prestigePoints, 10000, 1, 1, 1, "Automatically destroys all zombies before each level ends, turning them into bones."),
-  new Upgrades.Upgrade(117, "Advanced Time Warp", Upgrades.types.unlockSpell, Upgrades.costs.prestigePoints, 1000000, 1, 6, 1, "Uses all energy, and warps time for (energy expended / 10)."),
+  new Upgrades.Upgrade(117, "Advanced Time Warp", Upgrades.types.unlockSpell, Upgrades.costs.prestigePoints, 1000000, 1, 6, 1, "Uses all energy, and warps more powerfully and for longer the more energy you put in."),
   new Upgrades.Upgrade(118, "Prestige Points Upgrade", Upgrades.types.prestigePointsUpgrade, Upgrades.costs.prestigePoints, 10000, 1.25, 1, 10, "Each level gives an additional 10% multiplier to all prestige points earned."),
 ];
 

@@ -8,6 +8,7 @@ Spells = {
       cooldown : 120,
       duration : 30,
       energyCost : 0,
+      override : false,
       start() {
         GameModel.gameSpeed = 2;
       },
@@ -23,6 +24,7 @@ Spells = {
       cooldown : 180,
       duration : 20,
       energyCost : 50,
+      override : false,
       start() {
         GameModel.energySpellMultiplier = 5;
       },
@@ -38,6 +40,7 @@ Spells = {
       cooldown : 120,
       duration : 3,
       energyCost : 69,
+      override : false,
       start() {
         Zombies.detonate = true;
       },
@@ -53,6 +56,7 @@ Spells = {
       cooldown : 60,
       duration : 15,
       energyCost : 75,
+      override : false,
       start() {
         Humans.frozen = true;
       },
@@ -68,6 +72,7 @@ Spells = {
       cooldown : 360,
       duration : 5,
       energyCost : 100,
+      override : false,
       start() {
         Zombies.super = true;
       },
@@ -83,14 +88,20 @@ Spells = {
       cooldown : 0,
       duration : 1,
       energyCost : 1,
+      override: true,
       start() {
+        let speedFactor = Math.ceil(GameModel.energy/10);
         this.onCooldown = true;
-        this.cooldownLeft = Math.ceil(GameModel.energy/10)
+        this.cooldownLeft = speedFactor * 20;
         this.active = true;
         this.timer = this.cooldownLeft;
-        GameModel.sendMessage(this.name);
-        GameModel.gameSpeed = Math.ceil(GameModel.energy/10);
-        GameModel.energy = 0;
+        GameModel.energy -= speedFactor * 10;
+        speedFactor = (speedFactor > 7) ? 7 : speedFactor;
+        GameModel.gameSpeed = (speedFactor > 7) ? 7 : speedFactor;
+        GameModel.sendMessage("Speed boosted by " + ((speedFactor <= 1) ? ("nothing...") : (speedFactor + "!")));
+        if (GameModel.energy < 0) {
+          GameModel.energy = 0;
+        }
       },
       end() {
         GameModel.gameSpeed = 1;
@@ -126,13 +137,15 @@ Spells = {
     if (spell.energyCost > GameModel.energy)
       return false;
     
-    GameModel.energy -= spell.energyCost;
-    spell.onCooldown = true;
-    spell.cooldownLeft = spell.cooldown;
-    spell.active = true;
-    spell.timer = spell.duration;
+    if (spell.override != true) {
+      GameModel.energy -= spell.energyCost;
+      spell.onCooldown = true;
+      spell.cooldownLeft = spell.cooldown;
+      spell.active = true;
+      spell.timer = spell.duration;
+      GameModel.sendMessage(spell.name);
+    }
     spell.start();
-    GameModel.sendMessage(spell.name);
   },
   updateSpells(timeDiff) {
     for (var i = 0; i < this.spells.length; i++) {
