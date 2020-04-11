@@ -483,7 +483,6 @@ Humans = {
       human.plagueTickTimer = this.plagueTickTimer;
       Exclamations.newPoison(human);
       human.plagueTicks -= this.plagueTickModifier;
-      console.log(human.plagueTicks);
       if (human.plagueTicks <= 0) {
         human.infected = false;
         human.plagueDamage = 0;

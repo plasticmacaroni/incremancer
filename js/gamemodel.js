@@ -255,7 +255,7 @@ GameModel = {
           if (this.isBossStage(this.level) && Trophies.doesLevelHaveTrophy(this.level)) {
             Trophies.trophyAquired(this.level);
           }
-          this.prestigePointsEarned = this.prestigePointsForLevel(this.level);
+          this.prestigePointsEarned = Math.ceil(this.prestigePointsForLevel(this.level) * this.prestigeModifier);
           this.currentState = this.states.levelCompleted;
           this.levelResourcesAdded = false;
           this.calculateEndLevelBones();
@@ -470,6 +470,7 @@ GameModel = {
     constructions : [],
     prestigePointsEarned : 0,
     prestigePointsToSpend : 0,
+    prestigeModifier: 1,
     boneCollectors : 0,
     graveyardZombies : 1,
     harpies : 0,
@@ -489,7 +490,7 @@ GameModel = {
       this.persistentData.prestigePointsEarned = 0;
       this.persistentData.prestigePointsToSpend = 0;
     }
-    this.persistentData.prestigePointsEarned += points;
+    this.persistentData.prestigePointsEarned += points * this.prestigeModifier;
   },
 
   prestige() {

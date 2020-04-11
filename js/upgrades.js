@@ -45,7 +45,8 @@ Upgrades = {
     autoshop : "autoshop",
     graveyardHealth : "graveyardHealth",
     insidiousPlague : "insidiousPlague",
-    boneBoom : "boneBoom"
+    boneBoom : "boneBoom",
+    prestigePointsUpgrade : "prestigePointsUpgrade"
   },
 
   costs : {
@@ -238,6 +239,8 @@ Upgrades = {
         return;
       case this.types.boneBoom:
         GameModel.boneBoom = true;
+      case this.types.prestigePointsUpgrade:
+        GameModel.prestigeModifier = 1.1;
     }
   },
 
@@ -404,7 +407,9 @@ Upgrades = {
       case this.types.boneBoom:
         return this.currentRank(upgrade) > 0 ? "You have unlocked Bone Boom" : "You have yet to unlock Bone Boom";
       case this.types.advancedTimeWarp:
-        return this.currentRank(upgrade) > 0 ? "You have unlocked advanced time warp" : "You have yet to unlock advanced time warp"
+        return this.currentRank(upgrade) > 0 ? "You have unlocked advanced time warp" : "You have yet to unlock advanced time warp";
+      case this.types.prestigePointsUpgrade:
+        return this.currentRank(upgrade) > 0 ? "You have unlocked the prestige points ppgrade" : "You have yet to unlock the prestige points upgrade"
     }
   },
 
@@ -986,6 +991,7 @@ Upgrades.constructionUpgrades = [
   new Upgrades.Construction(222, "Harpy Outfitter", Upgrades.constructionTypes.harpy, {bones:75000, brains:75000, blood:80 * million}, 50, 1, 1, 1, 220, "Build an outfitter to upgrade the abilities of your harpies.", "Harpy upgrades now available in the shop!"),
 ];
 
+//Reminder:   Upgrade : function(id, name, type, costType, basePrice, multiplier, effect, cap, description, purchaseMessage, requires)
 Upgrades.prestigeUpgrades = [
   new Upgrades.Upgrade(108, "A Small Investment", Upgrades.types.startingPC, Upgrades.costs.prestigePoints, 10, 1.25, 1, 0, "Each rank gives you an additional 500 blood, 50 brains, and 200 bones when starting a new level."),
   new Upgrades.Upgrade(109, "Time Warp", Upgrades.types.unlockSpell, Upgrades.costs.prestigePoints, 50, 1, 1, 1, "Unlock the Time Warp spell in order to speed up the flow of time."),
@@ -1004,6 +1010,7 @@ Upgrades.prestigeUpgrades = [
   new Upgrades.Upgrade(115, "Insidious Plague", Upgrades.types.insidiousPlague, Upgrades.costs.prestigePoints, 2500, 1, 1, 1, "Makes the plague incurable so it lasts forever, but makes it do significantly less damage over time."),
   new Upgrades.Upgrade(116, "Bone Boom", Upgrades.types.boneBoom, Upgrades.costs.prestigePoints, 10000, 1, 1, 1, "Automatically destroys all zombies before each level ends, turning them into bones."),
   new Upgrades.Upgrade(117, "Advanced Time Warp", Upgrades.types.unlockSpell, Upgrades.costs.prestigePoints, 1000000, 1, 6, 1, "Uses all energy, and warps time for (energy expended / 10)."),
+  new Upgrades.Upgrade(118, "Prestige Points Upgrade", Upgrades.types.prestigePointsUpgrade, Upgrades.costs.prestigePoints, 10000, 1.25, 1, 10, "Each level gives an additional 10% multiplier to all prestige points earned."),
 ];
 
 Upgrades.upgrades = [
