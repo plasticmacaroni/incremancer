@@ -552,8 +552,11 @@ Upgrades = {
         }
         GameModel.persistentData.upgrades.push(persistUpgrade);
       }
-        
-      
+
+      if (upgrade.cap != 0 && Upgrades.currentRank(upgrade) >= upgrade.cap) {
+        GameModel.sendMessage(upgrade.name + " sold out!");  
+      }
+
       if (save)
         GameModel.saveData();
 

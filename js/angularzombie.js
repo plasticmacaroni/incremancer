@@ -620,8 +620,9 @@ angular.module('zombieApp', [])
     }
 
     zm.upgradeButtonText = function(upgrade) {
-      if (upgrade.cap != 0 && zm.currentRank(upgrade) >= upgrade.cap)
+      if (upgrade.cap != 0 && zm.currentRank(upgrade) >= upgrade.cap) {
         return "Sold Out";
+      }
         
       var price = zm.upgradePrice(upgrade);
 
