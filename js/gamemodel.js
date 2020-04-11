@@ -172,7 +172,7 @@ GameModel = {
 
   addBrains(value) {
     if (isNaN(this.persistentData.brains)) {
-      this.persistentData.blood = 0;  
+      this.persistentData.brains = 0;  
     }
     if (isNaN(value))
       return;
@@ -187,7 +187,7 @@ GameModel = {
 
   addBones(value) {
     if (isNaN(this.persistentData.bones)) {
-      this.persistentData.blood = 0;  
+      this.persistentData.bones = 0;  
     }
     if (isNaN(value))
       return;
@@ -255,7 +255,7 @@ GameModel = {
           if (this.isBossStage(this.level) && Trophies.doesLevelHaveTrophy(this.level)) {
             Trophies.trophyAquired(this.level);
           }
-          this.prestigePointsEarned = Math.ceil(this.prestigePointsForLevel(this.level) * this.prestigeModifier);
+          this.prestigePointsEarned = Math.ceil(this.prestigePointsForLevel(this.level) * this.persistentData.prestigeModifier);
           this.currentState = this.states.levelCompleted;
           this.levelResourcesAdded = false;
           this.calculateEndLevelBones();
@@ -490,7 +490,7 @@ GameModel = {
       this.persistentData.prestigePointsEarned = 0;
       this.persistentData.prestigePointsToSpend = 0;
     }
-    this.persistentData.prestigePointsEarned += points * this.prestigeModifier;
+    this.persistentData.prestigePointsEarned += points * this.persistentData.prestigeModifier;
   },
 
   prestige() {

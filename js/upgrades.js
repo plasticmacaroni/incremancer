@@ -240,7 +240,7 @@ Upgrades = {
       case this.types.boneBoom:
         GameModel.boneBoom = true;
       case this.types.prestigePointsUpgrade:
-        GameModel.prestigeModifier = 1.1;
+        GameModel.persistentData.prestigeModifier *= 1.1;
     }
   },
 
