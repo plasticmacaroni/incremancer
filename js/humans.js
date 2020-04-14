@@ -493,7 +493,7 @@ Humans = {
   healHuman(human) {
     if (human.health < human.maxHealth) {
       if (human.infected && human.plagueTicks > 0) {
-        human.plagueTicks--;
+        human.plagueTicks -= this.plagueTickModifier;
       }
       human.health += this.attackDamage * 2;
       if (human.health > human.maxHealth) {
